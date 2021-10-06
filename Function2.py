@@ -46,11 +46,15 @@ def connectURI(server, port):
 print( connectURI("credu.com", "80") )
 print( connectURI(port="80", server="credu.com") )
 
-#가변인자
+#가변인자(내부에서 튜플로 받아서 처리)
 def union(*ar):
+    #지역변수를 리스트로 초기화 
     result = []
+    #HAM(0)  | EGG(1)
     for item in ar:
+        #H(0) | A(1) | M(2)
         for x in item:
+            #아직 result에 포함되지 않았으면 
             if x not in result:
                 result.append(x)
     return result 
