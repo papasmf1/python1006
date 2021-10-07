@@ -7,7 +7,9 @@ def divide(a,b):
 #에러 처리를 하는 경우 
 try:
     #함수 호출
-    result = divide(5,"aaa")
+    result = divide(5,0)
+# except:
+#     pass 
 except TypeError:
     print("숫자여야 합니다.")
 except ZeroDivisionError:
