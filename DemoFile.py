@@ -11,7 +11,7 @@ f = open("c:\\work\\demo.txt", encoding="utf-8")
 print( f.read() )
 
 
-#리스트 형식으로 전체를 받기
+#한줄씩 읽기 
 print( f.tell() )
 #다시 처음으로 돌아가~~ 
 f.seek(0)
@@ -19,6 +19,14 @@ print( f.readline(), end="" )
 print( f.readline(), end="" )
 print( f.readline(), end="" )
 
+#리스트로 받기
+f.seek(0)
+result = f.readlines() 
+print( result )
+f.close() 
 
+#기존 파일에 첨부(a+)
+f = open("c:\\work\\demo.txt", "a+", encoding="utf-8")
+f.write("새로운 라인\n")
 f.close() 
 
