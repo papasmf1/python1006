@@ -4,19 +4,19 @@ import urllib.request
 #크롤링에 사용 
 from bs4 import BeautifulSoup
 
-#네이버 웹서버에 부탁 
-data = urllib.request.urlopen("http://comic.naver.com/webtoon/list.nhn?titleId=20853&weekday=fri")
-#검색을 스프 객체 생성 
-soup = BeautifulSoup(data, "html.parser")
+#페이징처리(1번에서 5번): URL주소를 동적으로 생성 
+for i in range(1,6):
+    url = "https://comic.naver.com/webtoon/list?titleId=20853&weekday=fri&page=" + str(i)
+    print(url)
+    data = urllib.request.urlopen(url)
+    #검색을 스프 객체 생성 
+    soup = BeautifulSoup(data, "html.parser")
 
-#다중 라인 주석: ctrl + / 
-# <td class="title">
-# 	<a href="/webtoon/detail?titleId">마음의 소리 50화 &lt;격렬한 나의 하루&gt;</a>
-# </td>
-cartoons = soup.find_all("td", class_="title")
+    cartoons = soup.find_all("td", class_="title")
+    f = open("c:\\work\\webtoon.txt", "a+", encoding="utf-8")
+    for item in cartoons:
+        title = item.find("a").text 
+        print( title.strip() )
+        f.write(title.strip() + "\n")
+    f.close() 
 
-print("갯수:{0}".format( len(cartoons) ))
-title = cartoons[0].find("a").text 
-link = cartoons[0].find("a")["href"]
-print( title )
-print( link )
